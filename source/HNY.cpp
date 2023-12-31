@@ -18,6 +18,18 @@ void ShowConsoleCursor(bool showFlag)
     SetConsoleCursorInfo(out, &cursorInfo);
 }
 
+void clearscreen()
+{
+    HANDLE hOut;
+    COORD Position;
+
+    hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    Position.X = 0;
+    Position.Y = 0;
+    SetConsoleCursorPosition(hOut, Position);
+}
+
 void print_tree() {
 
     srand(time(NULL));
@@ -78,8 +90,8 @@ int main()
     ShowConsoleCursor(false);
     while (1) {
         print_tree();
-        this_thread::sleep_for(std::chrono::milliseconds(750));
-        system("cls");
+        this_thread::sleep_for(std::chrono::milliseconds(450));
+        clearscreen(); // better than system("cls");
     }
     return 0;
 }
